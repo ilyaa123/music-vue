@@ -1,78 +1,19 @@
 import {
-	ActionContext,
-	ActionTree,
-	GetterTree,
-	MutationTree,
 	Module,
 	Store as VuexStore,
 	CommitOptions,
 	DispatchOptions,
-} from 'vuex'
+} from 'vuex';
 
-import { State as RootState } from '@/store'
+import { State as RootState } from '@/store';
 
-export type State = {
-	isAuthenticated: boolean
-}
+import { State, state } from './state';
 
-const state: State = {
-	isAuthenticated: false,
-}
+import { Getters, getters } from './getters';
 
-export enum MutationTypes {
-	SET_USER_AUTHENTICATED = 'SET_USER_AUTHENTICATED',
-}
+import { Mutations, mutations } from './mutations';
 
-export type Mutations<S = State> = {
-	[MutationTypes.SET_USER_AUTHENTICATED](state: S): void
-}
-
-const mutations: MutationTree<State> & Mutations = {
-	[MutationTypes.SET_USER_AUTHENTICATED](state: State) {
-		state.isAuthenticated = true
-	},
-}
-
-export enum ActionTypes {
-	SIGNIN = 'SIGNIN',
-}
-
-type AugmentedActionContext = {
-	commit<K extends keyof Mutations>(
-		key: K,
-		payload: Parameters<Mutations[K]>[1],
-	): ReturnType<Mutations[K]>
-} & Omit<ActionContext<State, RootState>, 'commit'>
-
-export interface Actions {
-	[ActionTypes.SIGNIN](
-		{ commit }: AugmentedActionContext,
-		payload: { username: string; password: string },
-	): void
-}
-
-export const actions: ActionTree<State, RootState> & Actions = {
-	async [ActionTypes.SIGNIN](
-		{ commit },
-		payload: { username: string; password: string },
-	) {
-	try {
-	
-	} catch (err) {
-	
-	}
-},
-}
-
-export type Getters = {
-	isAuthenticated(state: State): boolean
-}
-
-export const getters: GetterTree<State, RootState> & Getters = {
-	isAuthenticated: (state) => {
-		return state.isAuthenticated
-	},
-}
+import { Actions, actions } from './actions';
 
 export type Store<S = State> = Omit<
 	VuexStore<S>,

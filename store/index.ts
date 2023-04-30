@@ -1,10 +1,8 @@
 import { createStore } from 'vuex'
 
-import {
-  AuthModule,
-  Store as AuthStore,
-  State as AuthState,
-} from './modules/auth/'
+import { AuthModule, Store as AuthStore} from './modules/auth/'
+
+import { State as AuthState } from './modules/auth/state';
 
 export type State = {
   auth: AuthState

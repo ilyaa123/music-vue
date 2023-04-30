@@ -6,7 +6,7 @@ const lightTheme: ThemeDefinition = {
     dark: false,
     colors: {
         background: "#15202b",
-        surface: "#15202b",
+        surface: "#273b4f",
         primary: "#3f51b5",
         secondary: "#03dac6",
         error: "#f44336",
