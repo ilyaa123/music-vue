@@ -1,15 +1,22 @@
-import { useStore } from "~/store";
-import { ActionTypes } from '~/store/modules/auth/actions';
+import { useAuthStore } from "~/store/authStore";
 
-export default defineNuxtRouteMiddleware((to) => {
+export default defineNuxtRouteMiddleware( async (to) => {
     if (process.server){
         const nuxtApp = useNuxtApp();
+        const store = useAuthStore();
         const host = nuxtApp.ssrContext?.event.node.req.headers.host;
-        const store = useStore();
         const code = to.query.code?.toString()
-        if (code) store.dispatch(ActionTypes.AUTH__SIGNIN, {
-            code: code,
-            redirect_uri: 'http://' + host || 'http://localhost:3000'
-        })
+        const isAuthentificated = store.isAuthentificated;
+        if (!isAuthentificated && code) {
+            await useFetch('/api/auth', {
+                method: 'POST',
+                body: {
+                    code: code, 
+                    redirect_uri: 'http://' + host || 'http://localhost:3000'
+                }
+            })
+            // await store.signIn({ code: code, redirect_uri: 'http://' + host || 'http://localhost:3000' });
+        } 
+        
     }
 })

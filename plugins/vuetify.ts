@@ -7,8 +7,8 @@ const lightTheme: ThemeDefinition = {
     colors: {
         background: "#15202b",
         surface: "#273b4f",
-        primary: "#3f51b5",
-        secondary: "#03dac6",
+        primary: "#03dac6",
+        secondary: "#B5A33F",
         error: "#f44336",
         info: "#2196F3",
         success: "#4caf50",

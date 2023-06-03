@@ -10,28 +10,23 @@
     }
 </script>
 <template>
-    <v-container class="session__container">
-        <v-row no-gutters style="height: 100%;">
-            <v-col 
-                md="8" 
-                cols="12" 
-                style="height: 100%;"
-                v-resize="onResize"
-            >
-                <div ref="col" class="session__model">
-                </div>
-            </v-col>
-            <v-col md="4" cols="12" style="height: 100%;">
-                <slot />
-            </v-col>
-        </v-row>
-    </v-container>
+    <v-row no-gutters style="height: 100%;">
+        <v-col 
+            md="8" 
+            cols="12" 
+            style="height: 100%;"
+            v-resize="onResize"
+        >
+            <div ref="col" class="session__model">
+            </div>
+        </v-col>
+        <v-col md="4" cols="12" style="height: 100%;">
+            <slot />
+        </v-col>
+    </v-row>
 </template>
 <style scoped lang="scss">
     .session{
-        &__container{
-            min-height: 100vh;
-        }
         &__model{
             width: 100%;
             height: 100%;
