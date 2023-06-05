@@ -1,5 +1,5 @@
 <template>
     <div>
-        Home
+        Tracks
     </div>
 </template>

@@ -1,9 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     ssr: true,
-    css: ['vuetify/lib/styles/main.sass'],
+    app: {
+        head: {
+            charset: 'utf-8',
+            viewport: 'width=device-width, initial-scale=1',
+            title: 'Music'
+        }
+    },
+    css: ['vuetify/lib/styles/main.sass', '@mdi/font/css/materialdesignicons.min.css'],
     build: {
-        transpile: ['vuetify'],
+        transpile: ['vuetify', 'three'],
     },
     modules: [
         '@pinia/nuxt'

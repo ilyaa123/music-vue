@@ -1,6 +1,6 @@
 import { useAuthStore } from "~/store/authStore";
 
-export default defineNuxtRouteMiddleware( async (to) => {
+export default defineNuxtRouteMiddleware(async (to) => {
     if (process.server){
         const nuxtApp = useNuxtApp();
         const store = useAuthStore();
@@ -8,14 +8,18 @@ export default defineNuxtRouteMiddleware( async (to) => {
         const code = to.query.code?.toString()
         const isAuthentificated = store.isAuthentificated;
         if (!isAuthentificated && code) {
-            await useFetch('/api/auth', {
-                method: 'POST',
-                body: {
-                    code: code, 
-                    redirect_uri: 'http://' + host || 'http://localhost:3000'
-                }
-            })
-            // await store.signIn({ code: code, redirect_uri: 'http://' + host || 'http://localhost:3000' });
+            const data = {
+                code: code,
+                redirect_uri: 'http://' + host || 'http://localhost:3000'
+            }
+            const res = await store.signIn(data)
+            if (res?.access_token){
+                const access = useCookie('access_token');
+                access.value = res.access_token;
+                const refresh = useCookie('refresh_token')
+                refresh.value = res.refresh_token
+                return navigateTo('/app')
+            }
         } 
         
     }

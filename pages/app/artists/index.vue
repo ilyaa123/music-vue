@@ -1,5 +1,5 @@
 <template>
     <div>
-        Home
+        Artists
     </div>
 </template>

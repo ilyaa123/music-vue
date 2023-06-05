@@ -1,6 +1,7 @@
 import { ThemeDefinition, createVuetify } from "vuetify/lib/framework.mjs"
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import { mdi, aliases } from 'vuetify/iconsets/mdi'
 
 const lightTheme: ThemeDefinition = {
     dark: false,
@@ -25,6 +26,13 @@ export default defineNuxtPlugin(nuxtApp => {
             defaultTheme: 'lightTheme',
             themes: {
                 lightTheme
+            }
+        },
+        icons: {
+            defaultSet: 'mdi',
+            aliases,
+            sets: {
+                mdi
             }
         }
     });
