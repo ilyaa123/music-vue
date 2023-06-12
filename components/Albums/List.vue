@@ -1,25 +1,16 @@
 <script lang="ts" setup>
-    import { AlbumOrder } from "~/api/albums/types";
-    import { useAlbumStore } from "~/store/albumStore";
+    import { AlbumOrder } from '~/api/albums/types';
+    import { Album } from "~/types/album";
 
-    const store = useAlbumStore();
+    interface Props {
+        limit: string;
+        title: string;
+        order: AlbumOrder
+    }
 
-    const props = defineProps({
-        limit: {
-            type: String,
-            default: () => '20'
-        },
-        title: {
-            type: String,
-            default: () => 'Последнее'
-        },
-        order: {
-            type: String,
-            default: () => ''
-        }
-    })
+    const props = defineProps<Props>()
     
-    const { data, pending, error, refresh } = await useAsyncData('albums',() => useFetch('/api/albums/getAlbumsList', {
+    const { data, pending, error, refresh } = await useAsyncData('albums', async () => await useFetch<Album[]>('/api/albums/getAlbumsList', {
         method: 'GET',
         params: {
             limit: props.limit,
@@ -27,13 +18,12 @@
         }
     }))
     const albums = computed(() => {
-        return data.value?.data || []
+        return data.value?.data.value || []
     })
-    console.log('data', albums.value)
 </script>
 <template>
     <div class="mb-6">
-        <v-toolbar color="surface">
+        <v-toolbar color="surface" >
             <v-toolbar-title>{{ props.title }}</v-toolbar-title>
         </v-toolbar>
         <v-row>
@@ -42,7 +32,12 @@
                 v-for="(album, index) in albums"
                 :key="index"
             >
-                <albums-card :album="album" />
+                <ClientOnly>
+                    <template #fallback>
+                        <h3>Loading...</h3>
+                    </template>
+                    <AlbumsCard :album="album" />
+                </ClientOnly>
             </v-col>
         </v-row>
     </div>

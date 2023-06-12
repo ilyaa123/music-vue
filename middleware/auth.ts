@@ -14,11 +14,15 @@ export default defineNuxtRouteMiddleware(async (to) => {
             }
             const res = await store.signIn(data)
             if (res?.access_token){
-                const access = useCookie('access_token');
+                const access = useCookie('access_token', {
+                    maxAge: res.expires_in
+                });
                 access.value = res.access_token;
                 const refresh = useCookie('refresh_token')
                 refresh.value = res.refresh_token
                 return navigateTo('/app')
+            } else {
+                abortNavigation()
             }
         } 
         

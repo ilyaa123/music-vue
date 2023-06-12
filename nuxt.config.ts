@@ -1,6 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     ssr: true,
+    experimental: {
+        componentIslands: false
+    },
     app: {
         head: {
             charset: 'utf-8',

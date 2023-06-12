@@ -4,10 +4,12 @@ import { Login } from "~/api/auth";
 
 
 export const useAuthStore = defineStore('auth', {
-    state: () => ({
-        isAuthentificated: false,
-        authError: ''  
-    }),
+    state: () => {
+        return {
+            isAuthentificated: false,
+            authError: ''
+        }  
+    },
     getters: {
         getIsAuthentificated: (state) => state.isAuthentificated,
         getAuthError: (state) => state.authError
@@ -30,6 +32,9 @@ export const useAuthStore = defineStore('auth', {
                     this.authError = 'Неверные логин или пароль'
                 }
             }
-        } 
+        },
+        setIsAuth(){
+            this.isAuthentificated = true
+        }
     }
 })

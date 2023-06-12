@@ -18,7 +18,6 @@ export const useAlbumStore = defineStore('album', {
         async getAlbums(payload: getAlbumsData){
             try {
                 const res = await getAlbumsApi(payload)
-                console.log('res: ', res.data.results);
                 this.albumList = res.data.results
                 
             } catch (error) {

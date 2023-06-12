@@ -6,10 +6,10 @@ export default defineEventHandler(async (event) => {
     const client_id = process.env.NUXT_CLIENT_ID!
     const response = await getAlbumsApi({
         client_id: client_id,
-        format: 'jsonpretty',
+        format: 'json',
         order: (params.order as AlbumOrder),
         limit: (params.limit as string),
         imagesize: '200'
     })
-    return response.data.results
+    return {value: response.data.results}
 })

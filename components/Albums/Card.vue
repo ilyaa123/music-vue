@@ -10,7 +10,7 @@
 <template>
     <v-hover>
         <template v-slot:default="{ isHovering, props }">
-            <v-card color="primary" v-bind="props" @click="router.push('/app/albums/' + album.id)">
+            <v-card color="secondary" v-bind="props" @click="router.push('/app/albums/' + album.id)">
                 <v-img
                     :src="album.image" 
                     class="text-white image"
@@ -18,6 +18,7 @@
                     cover 
                     aspect-ratio="1"
                     :gradient="isHovering ? 'rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)' : 'rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)'"
+                    
                 >
                     <v-row
                         class="fill-height ma-0"
