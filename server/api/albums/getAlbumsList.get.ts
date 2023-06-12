@@ -9,7 +9,6 @@ export default defineEventHandler(async (event) => {
         format: 'json',
         order: (params.order as AlbumOrder),
         limit: (params.limit as string),
-        imagesize: '200'
     })
     return {value: response.data.results}
 })

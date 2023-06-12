@@ -9,7 +9,7 @@
 </script>
 <template>
     <v-layout>
-        <v-container class="layout__container mt-6 mb-6">
+        <v-container class="layout__container my-6">
             <layouts-vertical-navigation-drawer />
             <layouts-horizontal-app-bar />
             <v-main>

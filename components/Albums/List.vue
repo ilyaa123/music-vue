@@ -32,12 +32,7 @@
                 v-for="(album, index) in albums"
                 :key="index"
             >
-                <ClientOnly>
-                    <template #fallback>
-                        <h3>Loading...</h3>
-                    </template>
-                    <AlbumsCard :album="album" />
-                </ClientOnly>
+                <AlbumsCard :album="album" />
             </v-col>
         </v-row>
     </div>
